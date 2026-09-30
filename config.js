@@ -1,0 +1,1 @@
+const TEKO_CFG={url:'https://tvasatfdcwzvqynynlwl.supabase.co',key:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR2YXNhdGZkY3d6dnF5bnlubHdsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ3MDE4NTcsImV4cCI6MjEwMDI3Nzg1N30.-r3PXZqcTszIj_bMaszmqB23vQVDuroLol9MEzXJrjU'};
