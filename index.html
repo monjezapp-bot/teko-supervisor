@@ -107,7 +107,8 @@ const VAPID='BOEWFSkEt7LTXatldWh9uXocWcSW43YK79QJX5v_6vR2M7lqZvbPI4_A0fFsxl3DRlb
 const b64=s=>{const r=(s+'='.repeat((4-s.length%4)%4)).replace(/-/g,'+').replace(/_/g,'/'),a=atob(r),u=new Uint8Array(a.length);for(let i=0;i<a.length;i++)u[i]=a.charCodeAt(i);return u};
 const pushSub=async()=>{try{if(!G.key||!G.perm.n||!('serviceWorker' in navigator)||!('PushManager' in window)||!window.Notification||Notification.permission!='granted')return;const reg=await navigator.serviceWorker.ready;let sub=await reg.pushManager.getSubscription();if(!sub)sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64(VAPID)});const j=sub.toJSON(),sig=j.endpoint+G.key+new Date().toISOString().slice(0,10);if(G.ps===sig)return;const{error}=await sb.rpc('save_push',{p_token:null,p_key:G.key,p_sub:j});if(!error){G.ps=sig;sg()}}catch(e){}};
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)pushSub()});
-sb.channel('teko').on('broadcast',{event:'q'},()=>ST()).subscribe();setInterval(()=>ST(),5000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)ST()});
+let _stT=0;const stJit=()=>{if(_stT||document.hidden)return;_stT=setTimeout(()=>{_stT=0;ST()},200+Math.random()*1300)};
+sb.channel('teko').on('broadcast',{event:'q'},()=>stJit()).subscribe();setInterval(()=>ST(),5000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)ST()});
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 render();ST();pushSub();
 </script></body></html>
